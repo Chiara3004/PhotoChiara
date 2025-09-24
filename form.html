@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+ <meta charset="UTF-8">
+    
+    <title> form </title>
+  <link type="text/css" rel="stylesheet" href="home1.css">
+    </head>
+    <body>
+      <div id="intestazione"></div>
+
+  <header class="header-container">
+    <!-- Logo prima del titolo -->
+  <div id="logo-start">
+      <img id="logo-start-img" src="sfondi/infoII.png" alt="Logo">
+    </div>
+    
+    <!-- Titolo -->
+    <h1>Questionario</h1>
+    
+    <!-- Logo dopo il titolo -->
+     <div id="logo-end">
+      <img id="logo-end-img" src="sfondi/infoII.png" alt="Logo">
+    </div>
+  </header>
+  <div class="mode-toggle">
+  <button id="dayBtn" title="Modalità Giorno" aria-label="Passa a modalità giorno">
+    ☀️
+  </button>
+  <button id="nightBtn" title="Modalità Notte" aria-label="Passa a modalità notte">
+    🌙
+  </button>
+</div>
+<nav aria-label="Menu principale">
+    <!-- menù -->      
+    <div id="navigazione">    
+    
+           
+      <ul>
+	       <li><a href="index.html" title="Vai a home">&raquo; Home page</a></li>
+		  <li><a href="streetphotography.html" title="Vai a streetphotography">&raquo; Street photography</a></li>
+		  <li><a href="closeup.html" title="Vai a closeup">&raquo; Closeup</a></li>
+		  <li><a href="landscape.html" title="Vai a landscape">&raquo; Landscape</a></li>
+         <li><a href="form.html" title="vai a form">&raquo; Form</a></li>
+	    </ul>
+      </div>
+    </nav> 
+       <div id="modulo" >
+           <h3>Compila il questionario</h3>
+           <form method=POST action="mailto:chiara.obert@outlook.it" enctype="text/plain">
+           <fieldset>
+     <legend>Dati anagrafici</legend>
+         <p class="row"> 
+          <label for="name"> Nome </label> <input id="name" type="text" name="nome" size= "50">  
+        </p>  
+    <p class="row">   
+      <label for="cognome"> Cognome </label> <input id="cognome" type="text" name="cognome" size= "50"> 
+       </p>  
+    
+    <p><label for="lavoro"> Che lavoro fai?</label> </p> 
+    <p class="row"> 
+  <input id=lavoro list="lavori" name="lavori">
+  <datalist id="lavori">
+    <option value="Fotografo">
+    <option value="Scrittore">
+    <option value="Sceneggiatore">
+    <option value="Disegnatore">
+    <option value="Musicista">
+    <option value="Altro...">
+  </datalist>
+     
+  <p>Ti Piace Scattare Foto?</p> 
+    
+     
+  <div class="radio-group">
+    <input id="si" type="radio" name="fotografo" value="yes">
+    <label for="si">Sì</label>
+    <input id="no" type="radio" name="fotografo" value="no" >
+    <label for="no">No</label>
+  </div>
+
+             
+ 
+  <p>In quali occasioni scatti?</p> 
+
+  <div class=button>
+  <input id="feste" type="radio" name="occasioni" value="feste" >
+  <label for="feste">Alle feste</label> 
+  <input id="viaggi" type="radio" name="occasioni" value="viaggi" >
+  <label for="viaggi">Viaggi</label> 
+  <input id="altro" type="radio" name="occasioni" value="altro" >
+  <label for="altro_occasioni">Altro...</label> 
+  <input id="altro_occasioni" type="text" name="altro_occasioni" >
+    </div>    
+       
+              
+  
+    <fieldset>
+        <legend> Dammi un'idea </legend>
+        <h3> Proponi una foto che dovrei fare </h3>
+      <p class="row"> 
+        <textarea name="commento1" cols="70" rows="5" ></textarea> 
+     </fieldset>
+       <p>
+           <input type="submit" >
+            <input type="reset" >
+       </p>
+         </fieldset>
+           </form>
+           
+        </div>
+
+ <div id="piedipagina">
+    <div class="linea"></div> 
+    <footer> 2025 Chiara Obert
+   <div class="social-icons">
+    <a href="https://www.instagram.com/obert_chiara?igsh=MWY2aXBzOW1xcjVzaQ==" target=_blank title="Instagram">
+      <img src="icons8-instagram-logo-94.png" alt="Instagram" height="30" width="30">
+    </a>
+    
+  </div>
+   </footer>
+        
+    </div>
+      <script>
+      
+  const body = document.body;
+  const dayBtn = document.getElementById('dayBtn');
+  const nightBtn = document.getElementById('nightBtn');
+  //cambiare il logo      
+const logoStartImg = document.getElementById('logo-start-img');
+const logoEndImg = document.getElementById('logo-end-img');
+ if (localStorage.getItem('mode') === 'day') {
+  document.body.classList.add('day-mode');
+  logoStartImg.src = 'sfondi/infoIIB.png';
+  logoEndImg.src = 'sfondi/infoIIB.png';
+} else {
+  document.body.classList.remove('day-mode');
+  logoStartImg.src = 'sfondi/infoII.png';
+  logoEndImg.src = 'sfondi/infoII.png';
+}
+
+dayBtn.addEventListener('click', () => {
+  document.body.classList.add('day-mode');
+  logoStartImg.src = 'sfondi/infoIIB.png';
+  logoEndImg.src = 'sfondi/infoIIB.png';
+  localStorage.setItem('mode', 'day');
+});
+
+nightBtn.addEventListener('click', () => {
+  document.body.classList.remove('day-mode');
+  logoStartImg.src = 'sfondi/infoII.png';
+  logoEndImg.src = 'sfondi/infoII.png';
+  localStorage.setItem('mode', 'night');
+});
+</script>
+    </body> 
+  
+</html>
