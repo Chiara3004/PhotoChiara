@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 var tutteFoto = [];
 
-// Helper per forzare sempre il percorso sulla cartella thumbs/
+// Funzione che estrae il nome file e forza il percorso dentro thumbs/
 function correggiPercorsoThumb(url) {
     if (!url) return '';
     var nomeFile = url.split('/').pop().split('\\').pop();
@@ -168,9 +168,9 @@ function mostraGalleria(fotoLista) {
             </div>
         `;
 
-        // Al click sull'immagine, apre la foto da thumbs/
+        // Al click sull'immagine, si apre la foto direttamente in una nuova scheda dal percorso thumbs/
         item.querySelector('.gallery-image').addEventListener('click', () => {
-            apriFotoOriginale(urlThumb);
+            apriFotoDiretta(urlThumb);
         });
 
         item.querySelector('.lens-btn').addEventListener('click', (e) => {
@@ -225,10 +225,9 @@ function chiudiDettagli() {
     if (layout) layout.classList.remove('details-open');
 }
 
-// Apre la foto prendendola direttamente da thumbs/
-function apriFotoOriginale(urlFoto) {
+// Apre l'immagine direttamente in una nuova scheda prendendola da thumbs/
+function apriFotoDiretta(urlFoto) {
     var nomeFile = urlFoto.split('/').pop().split('\\').pop();
-    // Apre la foto direttamente dalla cartella thumbs/
     window.open(`thumbs/${encodeURIComponent(nomeFile)}`, '_blank');
 }
 
@@ -285,7 +284,7 @@ function inizializzaCarosello() {
         `;
 
         wrapper.addEventListener('click', () => {
-          apriFotoOriginale(urlThumb);
+          apriFotoDiretta(urlThumb);
         });
 
         carouselSlide.appendChild(wrapper);
