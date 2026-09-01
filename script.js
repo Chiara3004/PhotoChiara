@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 var tutteFoto = [];
 
-// Funzione che estrae il nome file e forza il percorso dentro thumbs/
+// Helper per garantire il percorso corretto alla cartella thumbs
 function correggiPercorsoThumb(url) {
     if (!url) return '';
     var nomeFile = url.split('/').pop().split('\\').pop();
@@ -168,7 +168,7 @@ function mostraGalleria(fotoLista) {
             </div>
         `;
 
-        // Al click sull'immagine, si apre la foto direttamente in una nuova scheda dal percorso thumbs/
+        // Cliccando sull'immagine si apre esattamente lo stesso URL valido usato nell'HTML
         item.querySelector('.gallery-image').addEventListener('click', () => {
             apriFotoDiretta(urlThumb);
         });
@@ -225,10 +225,9 @@ function chiudiDettagli() {
     if (layout) layout.classList.remove('details-open');
 }
 
-// Apre l'immagine direttamente in una nuova scheda prendendola da thumbs/
-function apriFotoDiretta(urlFoto) {
-    var nomeFile = urlFoto.split('/').pop().split('\\').pop();
-    window.open(`thumbs/${encodeURIComponent(nomeFile)}`, '_blank');
+// Apre esattamente il percorso che è già stato verificato e caricato nella galleria
+function apriFotoDiretta(percorsoValido) {
+    window.open(percorsoValido, '_blank');
 }
 
 function cercaFotoDB(query) {
