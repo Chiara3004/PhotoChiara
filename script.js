@@ -168,11 +168,6 @@ function mostraGalleria(fotoLista) {
             </div>
         `;
 
-        // Cliccando sull'immagine si apre esattamente lo stesso URL valido usato nell'HTML
-        item.querySelector('.gallery-image').addEventListener('click', () => {
-            apriFotoDiretta(urlThumb);
-        });
-
         item.querySelector('.lens-btn').addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -223,11 +218,6 @@ function mostraDettagliFoto(foto) {
 function chiudiDettagli() {
     var layout = document.querySelector('.page-layout');
     if (layout) layout.classList.remove('details-open');
-}
-
-// Apre esattamente il percorso che è già stato verificato e caricato nella galleria
-function apriFotoDiretta(percorsoValido) {
-    window.open(percorsoValido, '_blank');
 }
 
 function cercaFotoDB(query) {
@@ -281,10 +271,6 @@ function inizializzaCarosello() {
           <img src="${urlThumb}" alt="${foto.NOME || 'Foto carosello'}" class="carousel-img">
           <img src="sfondi/infoII.png" class="watermark-logo" alt="Firma Chiara Obert">
         `;
-
-        wrapper.addEventListener('click', () => {
-          apriFotoDiretta(urlThumb);
-        });
 
         carouselSlide.appendChild(wrapper);
       });
