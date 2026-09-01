@@ -109,10 +109,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 var tutteFoto = [];
 
-// Helper per normalizzare i percorsi e puntare alla cartella thumbs
-function correggiPercorso(url) {
+// Helper per forzare sempre il percorso sulla cartella thumbs/
+function correggiPercorsoThumb(url) {
     if (!url) return '';
-    // Estrae solo il nome del file (es: "foto1.jpg")
     var nomeFile = url.split('/').pop().split('\\').pop();
     return `thumbs/${nomeFile}`;
 }
@@ -152,7 +151,7 @@ function mostraGalleria(fotoLista) {
     }
 
     fotoLista.forEach(foto => {
-        var urlThumb = correggiPercorso(foto.URL_FILE || foto.URL_ORIGINALE);
+        var urlThumb = correggiPercorsoThumb(foto.URL_FILE || foto.URL_ORIGINALE);
 
         var item = document.createElement('div');
         item.className = 'photocontainer-item';
@@ -169,6 +168,7 @@ function mostraGalleria(fotoLista) {
             </div>
         `;
 
+        // Al click sull'immagine, apre la foto da thumbs/
         item.querySelector('.gallery-image').addEventListener('click', () => {
             apriFotoOriginale(urlThumb);
         });
@@ -225,9 +225,11 @@ function chiudiDettagli() {
     if (layout) layout.classList.remove('details-open');
 }
 
+// Apre la foto prendendola direttamente da thumbs/
 function apriFotoOriginale(urlFoto) {
-    var nomeFile = urlFoto.split('/').pop();
-    window.open(`dettaglio.html?img=${encodeURIComponent(nomeFile)}`, '_blank');
+    var nomeFile = urlFoto.split('/').pop().split('\\').pop();
+    // Apre la foto direttamente dalla cartella thumbs/
+    window.open(`thumbs/${encodeURIComponent(nomeFile)}`, '_blank');
 }
 
 function cercaFotoDB(query) {
@@ -272,9 +274,8 @@ function inizializzaCarosello() {
       carouselSlide.innerHTML = '';
 
       carouselPhotos.forEach(foto => {
-        var urlThumb = correggiPercorso(foto.URL_FILE || foto.URL_ORIGINALE);
+        var urlThumb = correggiPercorsoThumb(foto.URL_FILE || foto.URL_ORIGINALE);
 
-        // Creazione dello stesso wrapper usato nella galleria
         const wrapper = document.createElement('div');
         wrapper.className = 'img-wrapper carousel-item-wrapper';
 
