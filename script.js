@@ -109,6 +109,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 var tutteFoto = [];
 
+// Helper per normalizzare i percorsi e puntare alla cartella thumbs
+function correggiPercorso(url) {
+    if (!url) return '';
+    // Estrae solo il nome del file (es: "foto1.jpg")
+    var nomeFile = url.split('/').pop().split('\\').pop();
+    return `thumbs/${nomeFile}`;
+}
+
 function formattaData(dataStringa) {
     if (!dataStringa) return 'N/D';
     var d = new Date(dataStringa);
@@ -144,8 +152,7 @@ function mostraGalleria(fotoLista) {
     }
 
     fotoLista.forEach(foto => {
-        var urlThumb = foto.URL_FILE;
-        var urlOriginale = foto.URL_ORIGINALE || foto.URL_FILE;
+        var urlThumb = correggiPercorso(foto.URL_FILE || foto.URL_ORIGINALE);
 
         var item = document.createElement('div');
         item.className = 'photocontainer-item';
@@ -163,7 +170,7 @@ function mostraGalleria(fotoLista) {
         `;
 
         item.querySelector('.gallery-image').addEventListener('click', () => {
-            apriFotoOriginale(urlOriginale);
+            apriFotoOriginale(urlThumb);
         });
 
         item.querySelector('.lens-btn').addEventListener('click', (e) => {
@@ -218,8 +225,8 @@ function chiudiDettagli() {
     if (layout) layout.classList.remove('details-open');
 }
 
-function apriFotoOriginale(urlOriginale) {
-    var nomeFile = urlOriginale.split('/').pop();
+function apriFotoOriginale(urlFoto) {
+    var nomeFile = urlFoto.split('/').pop();
     window.open(`dettaglio.html?img=${encodeURIComponent(nomeFile)}`, '_blank');
 }
 
@@ -265,19 +272,19 @@ function inizializzaCarosello() {
       carouselSlide.innerHTML = '';
 
       carouselPhotos.forEach(foto => {
-        var urlOriginale = foto.URL_ORIGINALE || foto.URL_FILE;
+        var urlThumb = correggiPercorso(foto.URL_FILE || foto.URL_ORIGINALE);
 
         // Creazione dello stesso wrapper usato nella galleria
         const wrapper = document.createElement('div');
         wrapper.className = 'img-wrapper carousel-item-wrapper';
 
         wrapper.innerHTML = `
-          <img src="${foto.URL_FILE}" alt="${foto.NOME || 'Foto carosello'}" class="carousel-img">
+          <img src="${urlThumb}" alt="${foto.NOME || 'Foto carosello'}" class="carousel-img">
           <img src="sfondi/infoII.png" class="watermark-logo" alt="Firma Chiara Obert">
         `;
 
         wrapper.addEventListener('click', () => {
-          apriFotoOriginale(urlOriginale);
+          apriFotoOriginale(urlThumb);
         });
 
         carouselSlide.appendChild(wrapper);
