@@ -4,34 +4,41 @@ document.addEventListener("DOMContentLoaded", () => {
   const dropdown = document.querySelector(".dropdown");
   const dropdownBtn = document.querySelector(".dropdown-btn");
 
-  // --- CLICK SU CATEGORIE DEL MENU ---
-  const categoryLinks = document.querySelectorAll('.category-link');
 
-  categoryLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
+// --- CLICK SU CATEGORIE DEL MENU ---
+const categoryLinks = document.querySelectorAll('.category-link');
+
+categoryLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    const container = document.querySelector('.photocontainer');
+    
+    // Se la galleria esiste (siamo su index.html), filtriamo via JS
+    if (container) {
       e.preventDefault();
-
       const tag = link.getAttribute('data-tag');
-      
       if (tag) {
         cercaFotoDB(tag);
       }
-
       if (navMenu) {
         navMenu.classList.remove("open");
       }
-    });
+    }
+    
   });
+});
 
-  // Tasto Home: Ricarica tutte le foto
-  const homeBtn = document.querySelector('a[href="index.html"]');
-  if (homeBtn) {
-    homeBtn.addEventListener('click', (e) => {
+// Tasto Home: Ricarica tutte le foto o naviga normalmente
+const homeBtn = document.querySelector('a[href="index.html"]');
+if (homeBtn) {
+  homeBtn.addEventListener('click', (e) => {
+    const container = document.querySelector('.photocontainer');
+    if (container) {
       e.preventDefault();
       mostraGalleria(tutteFoto);
       if (navMenu) navMenu.classList.remove("open");
-    });
-  }
+    }
+  });
+}
 
   // Hamburger Menu
   if (hamburgerBtn && navMenu) {
