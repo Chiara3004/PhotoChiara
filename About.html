@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - Galleria fotografica di Chiara Obert</title>
+  
+  <!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <link type="text/css" rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="about-page">
+
+  <div class="page-layout">
+
+    <!-- Header -->
+    <header class="header-container grid-header">
+      <div id="logo-start">
+        <img id="logo-start-img" src="sfondi/infoII.png" alt="Logo">
+      </div>
+      <h1>Photo Chiara</h1>
+      <div id="logo-end">
+        <img id="logo-end-img" src="sfondi/infoII.png" alt="Logo">
+      </div>
+    </header>
+
+    <!-- Navigazione -->
+    <nav id="navigazione" class="grid-nav" aria-label="Menu principale">
+      <button class="hamburger" id="hamburgerBtn" aria-label="Apri menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="menù" id="navMenu">
+        <li><a href="index.html" title="Vai a home">Home</a></li>
+        <li><a href="About.html" class="active" title="Vai ad About">About</a></li>
+        <li class="dropdown">
+          <a href="index.html" class="dropdown-btn">Photos ▾</a>
+          <ul class="submenù"> 
+            <li><a href="index.html" class="category-link" data-tag="streetphotography">Street Photography</a></li>
+            <li><a href="index.html" class="category-link" data-tag="closeup">Close Up</a></li>
+            <li><a href="index.html" class="category-link" data-tag="landscape">Landscape</a></li>
+          </ul>
+        </li>
+
+        <!-- Pulsanti Cambio Tema -->
+        <li class="theme-menu-item">
+          <div class="mode-toggle">
+            <button id="dayBtn" title="Modalità Giorno" aria-label="Passa a modalità giorno">☀️</button>
+            <button id="nightBtn" title="Modalità Notte" aria-label="Passa a modalità notte">🌙</button>
+          </div>
+        </li>
+      </ul>    
+    </nav>
+
+
+    <!-- SIDEBAR: Carosello proporzionale + Contatti -->
+    <aside class="grid-sidebar">
+       <!-- 2. Informazioni di contatto -->
+      <article class="grid-contacts">
+        <h3>Informazioni di contatto</h3>
+        <div id="informazioni">  
+          <table>
+            <caption>Chiara Obert</caption> 
+            <tbody>
+              <tr>
+                <th scope="row">
+                  <div class="social-icons">
+                    <a href="https://www.instagram.com/obert_chiara?igsh=MWY2aXBzOW1xcjVzaQ==" target="_blank" title="Instagram">
+                      <img src="icons8-instagram-logo-94.png" alt="Instagram" height="30" width="30">
+                    </a>
+                  </div>
+                </th> 
+                <td>@obert_chiara</td>
+              </tr>
+              <tr><th scope="row">Email:</th> <td>chiara.obert@outlook.it</td></tr>
+              <tr><th scope="row">Numero:</th><td>3456974367</td></tr>
+              <tr><th scope="row">Posizione:</th><td>Fraz. Cimapiasole, Forno Canavese</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <!-- 1. Carosello adattivo nella Sidebar -->
+      <div class="carousel-container">
+        <button class="carousel-btn prev-btn" id="prevBtn" aria-label="Foto precedente">&#10094;</button>
+        <div class="carousel-slide" id="carouselSlide">
+          <!-- Immagini caricate via JS -->
+        </div>
+        <button class="carousel-btn next-btn" id="nextBtn" aria-label="Foto successiva">&#10095;</button>
+      </div>
+
+     
+    </aside>
+
+    <!-- CONTENUTO PRINCIPALE (Centrale) -->
+    <main class="grid-main about-main">
+      
+      
+
+      <!-- Form Questionario (Ripristinata struttura originaria) -->
+      <div id="modulo">
+        <h3>Compila il questionario</h3>
+        <form method="POST" action="mailto:chiara.obert@outlook.it" enctype="text/plain">
+          <fieldset>
+            <legend>Dati anagrafici</legend>
+            
+            <p class="form-row"> 
+              <label for="name">Nome</label> 
+              <input id="name" type="text" name="nome">  
+            </p>  
+            
+            <p class="form-row">   
+              <label for="cognome">Cognome</label> 
+              <input id="cognome" type="text" name="cognome"> 
+            </p>  
+            
+            <p class="form-row">
+              <label for="lavoro">Che lavoro fai?</label>
+              <input id="lavoro" list="lavori" name="lavori">
+              <datalist id="lavori">
+                <option value="Fotografo">
+                <option value="Scrittore">
+                <option value="Sceneggiatore">
+                <option value="Disegnatore">
+                <option value="Musicista">
+                <option value="Altro...">
+              </datalist>
+            </p>
+             
+            <div class="form-group">
+              <p>Ti piace scattare foto?</p> 
+              <div class="radio-group">
+                <label><input type="radio" name="fotografo" value="yes"> Sì</label>
+                <label><input type="radio" name="fotografo" value="no"> No</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <p>In quali occasioni scatti?</p> 
+              <div class="radio-group">
+                <label><input type="radio" name="occasioni" value="feste"> Alle feste</label> 
+                <label><input type="radio" name="occasioni" value="viaggi"> Viaggi</label> 
+                <label><input type="radio" name="occasioni" value="altro"> Altro...</label> 
+                <input type="text" id="altro_occasioni" name="altro_occasioni" placeholder="Specificare...">
+              </div> 
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Dammi un'idea</legend>
+            <label for="commento1"><strong>Proponi una foto che dovrei fare:</strong></label> 
+            <textarea id="commento1" name="commento1" rows="4"></textarea> 
+          </fieldset>
+
+          <div class="form-buttons">
+            <input type="submit" value="Invia">
+            <input type="reset" value="Annulla">
+          </div>
+        </form>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer id="piedipagina" class="grid-footer">
+      <div class="linea"></div> 
+      <p>&copy; 2025 Chiara Obert</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>

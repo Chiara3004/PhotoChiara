@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visualizza Foto - Chiara Obert</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0e0e0e; /* Stesso sfondo scuro del visore del browser */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      user-select: none; /* Impedisce la selezione dell'immagine */
+      -webkit-user-select: none;
+    }
+
+    .photo-container {
+      position: relative;
+      display: inline-block;
+      max-width: 100vw;
+      max-height: 100vh;
+    }
+
+    .photo-container img.main-photo {
+      max-width: 100vw;
+      max-height: 100vh;
+      display: block;
+      object-fit: contain;
+    }
+
+    /* Filigrana / Logo sovrapposto */
+    .photo-container .watermark {
+      position: absolute;
+      bottom: 25px;
+      right: 25px;
+      
+      /* DIMENSIONE: Ridotta (prima era fino a 120px) */
+      width: clamp(40px, 5vw, 75px);
+      height: auto;
+      
+      /* TRASPARENZA: Ridotta per renderlo più discreto (0.35 = 35% di opacità) */
+      opacity: 0.35; 
+      
+      pointer-events: none; /* Non cliccabile */
+      filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.5));
+    
+    }
+  </style>
+</head>
+<!-- Blocco del tasto destro sull'intera pagina -->
+<body oncontextmenu="return false;">
+
+  <div class="photo-container">
+    <img id="target-photo" src="" alt="Foto" class="main-photo" dragstart="return false;" ondragstart="return false;">
+    <img src="sfondi/infoII.png" alt="Logo Chiara Obert" class="watermark">
+  </div>
+
+  <script>
+    // Legge il parametro "img" dall'URL (es: dettaglio.html?img=img_0006.jpg)
+    const urlParams = new URLSearchParams(window.location.search);
+    const imageName = urlParams.get('img');
+
+    const photoElement = document.getElementById('target-photo');
+
+    if (imageName) {
+      // Imposta il percorso della foto
+      photoElement.src = 'fotogalleria/' + imageName;
+    } else {
+      document.body.innerHTML = '<p style="color:white;">Nessuna immagine selezionata.</p>';
+    }
+
+    // Blocco tasti di scelta rapida per salvare (Ctrl+S, Cmd+S)
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
+        e.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
